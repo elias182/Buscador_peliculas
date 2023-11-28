@@ -141,6 +141,8 @@ function displayinfo(results) {
                 <p><strong>Escritor:</strong> ${results.Writer}</p>
                 <p><strong>Actores:</strong> ${results.Actors}</p>
                 <p><strong>Sinposis:</strong> ${results.Plot}</p>
+                <br>
+                <p><strong>Valoracion:</strong> ${results.imdbRating}</p>
                 </div>
                 </div>
             `;

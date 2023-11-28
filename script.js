@@ -1,57 +1,25 @@
 window.onload = () => {
 
 buscador();
-// informe();
 
-document.getElementById("informe").addEventListener("click", function() {
-    obtenerTop5BoxOfficeYDibujarGrafica();
-});
+        let selectElem = document.getElementById("tipob");
+        tipo=selectElem.value;
+            selectElem.addEventListener("change", function (){
+            tipo=this.value
+    })
+
+    document.getElementById("informe").addEventListener("click", function() {
+        obtenerTop5BoxOfficeYDibujarGrafica();
+
+  })
 
 }
+let tipo;
 
 var cont = 1;
 var pelis= [];
 var pelisinfor=[];
-
-
-// google.charts.load("current", { packages: ['corechart'] });
-// var dataImdbRating = [["Película", "imdbRating"]];
-// var optionsImdbRating = {
-//     title: "Películas por imdbRating",
-//     width: 600,
-//     height: 400,
-//     bar: { groupWidth: "95%" },
-//     legend: { position: "none" },
-// };
-
-// var dataBoxOffice = [["Película", "BoxOffice"]];
-// var optionsBoxOffice = {
-//     title: "Películas por BoxOffice",
-//     width: 600,
-//     height: 400,
-//     bar: { groupWidth: "95%" },
-//     legend: { position: "none" },
-// };
-
-// var dataImdbVotes = [["Película", "imdbVotes"]];
-// var optionsImdbVotes = {
-//     title: "Películas por imdbVotes",
-//     width: 600,
-//     height: 400,
-//     bar: { groupWidth: "95%" },
-//     legend: { position: "none" },
-// };
-
-
-
-        // Obtener el elemento select
-        const selectElem = document.getElementById("tipob");
-
-
-
-
-        var tipo= "movie"
-        // Hacer algo con el valor seleccionado (por ejemplo, imprimirlo en la consola)
+    // Obtener el elemento select
 
 
 
@@ -60,30 +28,34 @@ var pelisinfor=[];
 
 
 
-function deseleccionar(checkbox) {
-    var checkboxes = document.getElementsByName("opcion");
-    for (var i = 0; i < checkboxes.length; i++) {
-      if (checkboxes[i] !== checkbox) {
-        checkboxes[i].checked = false;
-      }
+    
+
+
+
+
+    var timeoutId;
+
+    function buscador() {
+        var buscador = document.getElementById("searchInput");
+    
+        buscador.addEventListener("keyup", function() {
+            var valor = buscador.value.trim();
+    
+            // Cancelar el timeout existente si se está escribiendo rápidamente
+            clearTimeout(timeoutId);
+    
+            if (valor.length > 2) {
+                // Configurar un nuevo timeout
+                timeoutId = setTimeout(function() {
+                    searchvermas();
+                }, 500); // Ajusta el tiempo en milisegundos según tus necesidades
+            }
+        });
     }
-  }
-
-function buscador() {
-    var buscador = document.getElementById("searchInput");
-  
-    buscador.addEventListener("keyup", function() {
-      var valor = buscador.value.trim(); // Obtener el valor del input y eliminar espacios en blanco al principio y al final
-  
-      if (valor.length > 2) {
-        searchvermas();
-      }
-    });
-  }
 
   function searchvermas() {
     cont=1
-    
+    console.log("entra");
     searchMovies();
 }
 function searchMovies() {
@@ -326,70 +298,3 @@ function obtenerTop5BoxOfficeYDibujarGrafica() {
   }
   }
   
-
-// function informe(){
-
-//     document.getElementById("informe").addEventListener("click", function() {
-//         const apiKey = "af595243";
-//     pelis.forEach(ids => {
-
-    
-
-//     const url = `https://www.omdbapi.com/?apikey=${apiKey}&i=${ids}`;
-//     fetch(url)
-//         .then(response => response.json())
-//         .then(data => {
-           
-//             displayinforme(data);
-            
-            
-//         })
-//         .catch(error => {
-//             console.log("Error:", error);
-//         });
-
-//     })
-//     })
-    
-// }
-
-// function displayinforme(results) {
-//     if (results) {
-
-//         pelis.push(results.id);
-        
-        // var pelicula = {
-        //     titulo: results.Title,
-        //     imdbRating: parseFloat(results.imdbRating),
-        //     BoxOffice: parseFloat(results.BoxOffice.replace(/[^\d.]/g, '')),
-        //     imdbVotes: parseInt(results.imdbVotes.replace(/,/g, ''), 10)
-        // };
-
-        // pelisinfor.push(pelicula);
-
-        // // Agregar datos para imdbRating
-        // dataImdbRating.push([results.Title, pelicula.imdbRating]);
-
-        // // Agregar datos para BoxOffice
-        // dataBoxOffice.push([results.Title, pelicula.BoxOffice]);
-
-        // // Agregar datos para imdbVotes
-        // dataImdbVotes.push([results.Title, pelicula.imdbVotes]);
-
-        // console.log(results.Title);
-//     }
-// }
-
-// function muestrainfor() {
-//     var chartImdbRating = new google.visualization.ColumnChart(document.getElementById("columnchart_imdbRating"));
-//     var chartBoxOffice = new google.visualization.ColumnChart(document.getElementById("columnchart_BoxOffice"));
-//     var chartImdbVotes = new google.visualization.ColumnChart(document.getElementById("columnchart_imdbVotes"));
-
-//     var datarImdbRating = google.visualization.arrayToDataTable(dataImdbRating);
-//     var datarBoxOffice = google.visualization.arrayToDataTable(dataBoxOffice);
-//     var datarImdbVotes = google.visualization.arrayToDataTable(dataImdbVotes);
-
-//     chartImdbRating.draw(datarImdbRating, optionsImdbRating);
-//     chartBoxOffice.draw(datarBoxOffice, optionsBoxOffice);
-//     chartImdbVotes.draw(datarImdbVotes, optionsImdbVotes);
-// }

@@ -10,7 +10,11 @@ buscador();
 
     document.getElementById("informe").addEventListener("click", function() {
         obtenerTop5BoxOfficeYDibujarGrafica();
+  })
+  var quita=document.getElementById("quitar")
 
+  quita.addEventListener("click", function() {
+      document.getElementById("informes").style.display="none";
   })
 
 }
@@ -146,6 +150,7 @@ function displayinfo(results) {
 
             quita.addEventListener("click", function() {
                 resultsContainer.style.display="none";
+                document.getElementById("informes").style.display="none";
             })
             
         }
